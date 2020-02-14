@@ -11,20 +11,6 @@
     .nav{
       z-index:1;
     }
-    .adminlayout-cont1{
-        height:500px;
-        position:relative;
-        top:-50px;
-    }
-    .menu{
-        margin-top:77px;
-        margin-left:-30px;
-    }
-    .menu li{
-        list-style-type:none;
-        margin:10px 0px 10px 0px;
-        font-size:20px;
-    }
 </style>
 
 <body>
@@ -39,19 +25,6 @@
     </ul>
   </div>
 </nav>
-
-<div class="container-fluid adminlayout-cont1">
-    <div class="row">
-        <div class="col-md-2" style="border:1px solid #ccc;
-        height:500px">
-            <div class="menu">
-                <ul>
-                    <li><a href="#">Add book</a></li>
-                    <li><a href="#">Delete book</a></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</div>    
+  
 </body>
 </html>

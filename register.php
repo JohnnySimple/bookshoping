@@ -89,6 +89,7 @@
 
 ?>
 <body>
+<?php require "homenavbar.php" ?>
     <div class="container cont1">
         <h3>Register Here!</h3>
         <div class="form">

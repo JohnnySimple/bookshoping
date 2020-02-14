@@ -13,10 +13,10 @@ if($conn->connect_error) {
 
 $sql = "CREATE TABLE Orders(
     id INT(10) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    user_id INT(10) NOT NULL,
-    book_id INT(10) NOT NULL,
+    customer_id INT(10) UNSIGNED NOT NULL,
+    book_id INT(10) UNSIGNED NOT NULL,
     amount FLOAT,
-    FOREIGN KEY(user_id) REFERENCES Users(id),
+    FOREIGN KEY(customer_id) REFERENCES Users(id),
     FOREIGN KEY(book_id) REFERENCES Books(id)
 )";
 

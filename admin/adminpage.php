@@ -12,6 +12,9 @@ session_start();
 ?>
 <body>
     <?php require "adminlayout.php" ?>
-    <h1>Welcom <?php echo $_SESSION["username"]?></h1>
+    <div class="col-md-2">
+        <?php require "adminsidebar.php" ?>
+    </div>
+    <h1>Welcome <?php echo $_SESSION["username"]?></h1>
 </body>
 </html>

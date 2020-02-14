@@ -109,6 +109,7 @@
 ?>
 
 <body>
+<?php require "homenavbar.php" ?>
 <div class="container cont1">
         <h3>Login Here!</h3>
         <div class="form">
