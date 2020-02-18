@@ -21,7 +21,7 @@
     </div>
     <ul class="nav navbar-nav">
       <li class="active"><a href="#">Home</a></li>
-      <li><a href="#">Logout</a></li> 
+      <li><a href="../logout.php">Logout</a></li> 
     </ul>
   </div>
 </nav>

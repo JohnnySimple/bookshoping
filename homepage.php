@@ -42,9 +42,10 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
 
 ?>
 <body>
+    <?php require "homenavbar.php" ?>
     <div align="right" style="margin-right:30px;font-size:20px"><span>Welcome <?php echo $_SESSION["username"] ?></span></div>
     <div class="container">
-    <h3>Available Books</h3><hr width="70%">
+    <h3>Available Books</h3><hr width="30%" style="margin-left:-30px">
     <div>
         <table class="table table-striped">
             <tr>
@@ -54,13 +55,45 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
                 <th>Purchase</th>
             </tr>
                 <?php
+                if(isset($_POST["book_id"])) {
+                    // echo 'bought' . $_POST["book_id"];
+                    $sql_amt = "SELECT price FROM Books WHERE id='$_POST[book_id]'";
+                    $res = $conn->query($sql_amt);
+                    $result = $res->fetch_assoc();
+
+                    $sql_user_id = "SELECT id FROM Users WHERE username='$_SESSION[username]'";
+                    $sql_user_id_res = $conn->query($sql_user_id);
+                    $sql_user_id_result = $sql_user_id_res->fetch_assoc();
+
+                    // echo "$result[price] $sql_user_id_result[id] $_POST[book_id]";
+                    $sql_order_book = "INSERT INTO Orders(customer_id, book_id, amount)
+                    VALUES('$sql_user_id_result[id]', '$_POST[book_id]', '$result[price]')";
+
+                    if($conn->query($sql_order_book) == true) {
+                        echo "Successful order!!!";
+                    } else {
+                        echo $conn->error;
+                    }
+                }
+
                 foreach($books as $row) {
+                    if($row['price'] === '0' ) {
+                        $amt = 'Free';
+                    } else {
+                        $amt = 'Buy';
+                    }
                     echo "<tr>
                         <tr>
                             <td>$row[title]</td>
                             <td>$row[author]</td>
                             <td>$row[price]</td>
-                            <td><button class='btn btn-success'>Buy</button></td>
+                            <td>
+                            <form method='post'>
+                                <a href='#'>
+                                <button name='book_id' value='$row[id]' class='btn btn-success'>$amt</button>
+                                </a>
+                            </form>
+                            </td>
                         </tr>
                     </tr>";
                     // echo "<div class='col-md-1 book'>

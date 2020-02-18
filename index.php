@@ -3,6 +3,9 @@
 <head>
     <title>Home</title>
 </head>
+<?php 
+    session_start();
+?>
 <Link rel="stylesheet" href="../css/bootstrap.min.css"></Link>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/jquery1.js"></script>

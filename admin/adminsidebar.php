@@ -32,7 +32,8 @@
             <div class="menu">
                 <ul>
                     <li><a href="addbook.php">Add book</a></li>
-                    <li><a href="#">Delete book</a></li>
+                    <li><a href="deletebook.php">Delete book</a></li>
+                    <li><a href="orders.php">Orders</a></li>
                 </ul>
             </div>
         </div>

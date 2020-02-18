@@ -20,6 +20,7 @@
 </style>
 
 <?php
+    session_start();
     $servername = "localhost";
     $username = "root";
     $password = "";
@@ -30,6 +31,7 @@
     if($conn->connect_error) {
         die ("connection failed: " . $conn->connect_error);
     }
+    
 
     // $name = $_POST["username"];
     // $email = $_POST["email"];
