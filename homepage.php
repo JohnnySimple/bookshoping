@@ -69,8 +69,14 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
                     $sql_order_book = "INSERT INTO Orders(customer_id, book_id, amount)
                     VALUES('$sql_user_id_result[id]', '$_POST[book_id]', '$result[price]')";
 
+                    
+
+
                     if($conn->query($sql_order_book) == true) {
                         echo "Successful order!!!";
+                        $sql_book_sold = "UPDATE Books SET sold='1' WHERE id=$_POST[book_id]";
+                        $sql_book_sold_res = $conn->query($sql_book_sold);
+
                     } else {
                         echo $conn->error;
                     }
@@ -82,7 +88,9 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
                     } else {
                         $amt = 'Buy';
                     }
-                    echo "<tr>
+
+                    if($row['sold'] == 0){
+                        echo "<tr>
                         <tr>
                             <td>$row[title]</td>
                             <td>$row[author]</td>
@@ -101,6 +109,8 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
                     //     <span>by - $row[author]</span><br>
                     //     <button class='btn btn-success'>Buy</button>
                     // </div>";
+                    }
+                    
                 }
     ?>
         </table>

@@ -6,7 +6,7 @@
     <ul class="nav navbar-nav">
       <li class="active"><a href="index.php">Home</a></li>
       <?php
-        if($_SESSION["loggedin"]) {
+        if($_SESSION["loggedin"] == true) {
           echo "<li><a href='logout.php'>Logout</a></li>";
         } else {
           echo "
