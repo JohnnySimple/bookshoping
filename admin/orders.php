@@ -46,7 +46,7 @@
 ?>
 <body>
     <?php require "adminlayout.php" ?>
-    <div class="container-fluid">
+    <!-- <div class="container-fluid"> -->
         <div class="row">
             <div class="col-md-2">
                 <?php require "adminsidebar.php" ?>
@@ -75,6 +75,6 @@
                 </table>
             </div>
         </div>
-    </div>
+    <!-- </div> -->
 </body>
 </html>

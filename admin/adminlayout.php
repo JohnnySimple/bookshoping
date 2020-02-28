@@ -12,18 +12,22 @@
       z-index:1;
     }
 </style>
-
+<?php
+session_start();
+?>
 <body>
-<nav class="navbar navbar-default nav">
+<nav class="navbar navbar-inverse nav">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="#">Admin Panel</a>
+      <a class="navbar-brand" href="adminpage.php">Admin Panel</a>
     </div>
-    <ul class="nav navbar-nav">
-      <li class="active"><a href="#">Home</a></li>
-      <li><a href="../logout.php">Logout</a></li> 
+    <ul class="nav navbar-nav navbar-right">
+      <li>
+      <a><?php echo $_SESSION["username"]?></a>
+      </li>
     </ul>
   </div>
+  
 </nav>
   
 </body>

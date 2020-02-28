@@ -14,6 +14,7 @@
     <div class="collapse navbar-collapse" id="myNavbar">
     <ul class="nav navbar-nav navbar-right">
     <?php
+
       if($_SESSION["loggedin"] == true) {
         // echo "<li><a href='logout.php'>Logout</a></li>";
         echo '
