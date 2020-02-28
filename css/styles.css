@@ -1,0 +1,11 @@
+/* .cont1 {
+    background-image: url("imgs/library1.jpeg");
+    height: 700px;
+} */
+.background-text {
+    color: #fff;
+    margin-top: 250px;
+}
+.background-text p{
+    font-size: 60px;
+}

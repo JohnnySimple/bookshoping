@@ -17,7 +17,8 @@ $q = $_REQUEST['q'];
 $hint = "";
 $author = "";
 $price = "";
-$hint_array = $author_array = $price_array = array();
+$imagename = "";
+$hint_array = $author_array = $price_array = $imagename_array = array();
 
 if($q !== "") {
     $q = strtolower($q);
@@ -43,6 +44,12 @@ if($q !== "") {
             } else {
                 $price_array[count($price_array)] = $name[price];
             }
+
+            if($imagename === "") {
+                $imagename_array[count($imagename_array)] = $name['imagename'];
+            } else {
+                $imagename_array[count($imagename_array)] = $name[imagename];
+            }
         }
     }
 }
@@ -59,11 +66,16 @@ if(count($hint_array) == 0) {
 } else {
     for($i=0; $i<count($hint_array); $i++) {
         echo "
-            <tr>
-                <td>$hint_array[$i]</td>
-                <td>$author_array[$i]</td>
-                <td>$price_array[$i]</td>
-            </tr>
+        <div class='col-md-3 single-post'>
+        <div class='img-div'>
+            <img src='assets/book_covers/". $imagename_array[$i] ."' alt='img not found' height='300px' width='250px'>
+        </div>
+        <div class='post-text'>
+            <h4>$hint_array[$i]</h4>
+            <p>- $author_array[$i]</p>
+            <h4 style=''>$ $price_array[$i]</h4>
+            </div>
+        </div>
         ";
     }
 }

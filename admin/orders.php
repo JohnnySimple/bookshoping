@@ -17,7 +17,7 @@
     $sql = "SELECT * FROM Orders";
     $results = $conn->query($sql);
     if($results != true) {
-        echo "Lela awu!! " . $conn->error;
+        echo "Unable to query Orders table" . $conn->error;
     }
 
     // function to return book title using the foreign key book_id in the orders table
@@ -26,7 +26,7 @@
         $sql_book = "SELECT title FROM Books WHERE id=$id";
         $sql_book_res = mysqli_fetch_assoc($conn->query($sql_book));
         if($sql_book_res != true) {
-            echo "Lela awu! " . $conn->error;
+            echo "Unable to query Books table:" . $conn->error;
         }
 
         return $sql_book_res['title'];
@@ -38,7 +38,7 @@
         $sql_customer = "SELECT username FROM Users WHERE id=$id";
         $sql_customer_res = mysqli_fetch_assoc($conn->query($sql_customer));
         if($sql_customer_res != true) {
-            echo "Lela awu! " . $conn->error;
+            echo "Unable to query Users table:" . $conn->error;
         }
 
         return $sql_customer_res['username'];

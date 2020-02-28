@@ -17,7 +17,7 @@
     $sql = "SELECT * FROM Books";
     $results = $conn->query($sql);
     if($results != true) {
-        echo "Lela awu" . $conn->error;
+        echo "Unable to query Books table" . $conn->error;
     }
 
 ?>

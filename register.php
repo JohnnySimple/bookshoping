@@ -8,9 +8,6 @@
 <script src="js/jquery1.js"></script>
 
 <style>
-    .cont1 {
-        margin-top:200px;
-    }
     .form {
         width:30%;
     }
@@ -38,7 +35,7 @@
     // $pass = $_POST["password"];
     // $confirm_pass = $_POST["confirm_password"];
 
-    $nameErr = $emailErr = $passwordErr = $confirm_passwordErr = "";
+    $nameErr = $emailErr = $passwordErr = $confirm_passwordErr = $firstnameErr = $lastnameErr = "";
 
     if(isset($_POST["submit"])){
 
@@ -46,6 +43,18 @@
             $nameErr = "Name is required!";
         } else {
             $name = test_input($_POST["username"]);
+        }
+
+        if(empty($_POST["firstname"])) {
+            $firstnameErr = "Firstname is required!";
+        } else {
+            $firstname = test_input($_POST["firstname"]);
+        }
+
+        if(empty($_POST["lastname"])) {
+            $lastnameErr = "Lastname is required!";
+        } else {
+            $lastname = test_input($_POST["lastname"]);
         }
 
         if(empty($_POST["email"])) {
@@ -67,13 +76,13 @@
         } else {
             $confirm_pass = test_input($_POST["confirm_password"]);
             
-            $sql = "INSERT INTO Users (username, email, password)
-            VALUES('$name', '$email', '$pass')";
+            $sql = "INSERT INTO Users (firstname, lastname, username, email, password)
+            VALUES('$firstname', '$lastname', '$name', '$email', '$pass')";
     
             if($conn->query($sql)) {
                 echo "Account created successfully!!";
             } else {
-                echo "Aduule! error APAI!" . $conn->error;
+                echo "Unable to create account:" . $conn->error;
             }
         }
         
@@ -93,19 +102,25 @@
 <body>
 <?php require "homenavbar.php" ?>
     <div class="container cont1">
-        <h3>Register Here!</h3>
-        <div class="form">
-            <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" class="form-group">
-                <input type="text" name="username" class="form-control" placeholder="Username">
-                <span class="error"><?php echo $nameErr; ?></span>
-                <input type="email" name="email" class="form-control" placeholder="Email">
-                <span class="error"><?php echo $emailErr; ?></span>
-                <input type="password" name="password" class="form-control" placeholder="Password">
-                <span class="error"><?php echo $passwordErr; ?></span>
-                <input type="password" name="confirm_password" class="form-control" placeholder="Confirm Password">
-                <span class="error"><?php echo $confirm_passwordErr; ?></span>
-                <input type="submit" name="submit" value="Submit"> 
-            </form>
+        <div>
+            <h3>Register Here!</h3>
+            <div class="form">
+                <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" class="form-group">
+                    <input type="text" name="firstname" class="form-control" placeholder="Firstname">
+                    <span class="error"><?php echo $firstnameErr; ?></span>
+                    <input type="text" name="lastname" class="form-control" placeholder="Lastname">
+                    <span class="error"><?php echo $lastnameErr; ?></span>
+                    <input type="text" name="username" class="form-control" placeholder="Username">
+                    <span class="error"><?php echo $nameErr; ?></span>
+                    <input type="email" name="email" class="form-control" placeholder="Email">
+                    <span class="error"><?php echo $emailErr; ?></span>
+                    <input type="password" name="password" class="form-control" placeholder="Password">
+                    <span class="error"><?php echo $passwordErr; ?></span>
+                    <input type="password" name="confirm_password" class="form-control" placeholder="Confirm Password">
+                    <span class="error"><?php echo $confirm_passwordErr; ?></span>
+                    <input type="submit" name="submit" class="btn btn-primary" value="Submit"> 
+                </form>
+            </div>
         </div>
     </div>
 </body>

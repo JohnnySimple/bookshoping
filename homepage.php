@@ -31,6 +31,12 @@
     margin:0px 5px 0px 5px;
     height:200px;
 }
+.single-post {
+    height:450px;
+}
+.img-div {
+    
+}
 
 </style>
 <?php
@@ -54,7 +60,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
     $sql = "SELECT * FROM Books";
     $books = $conn->query($sql);
     if($books != true) {
-        echo "Lela awu" . $conn->error;
+        echo "Unable to query from table Books" . $conn->error;
     }
 
 ?>
@@ -67,20 +73,14 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
         </form>
         </div>
     <div align="right" class="col-md-3" style="font-size:20px">
-        <span>Welcome <?php echo $_SESSION["username"] ?></span>
     </div>
     <div class="container" style="margin-top:60px;">
     <!-- <p>Suggestions: <span id="txtHint"></span></p> -->
     <h3>Available Books</h3><hr width="30%" style="margin-left:-30px">
-    <div>
-        <table class="table table-striped" id="txtHint">
-            <tr>
-                <th>Title</th>
-                <th>Author</th>
-                <th>Price($)</th>
-                <th>Purchase</th>
-            </tr>
-                <?php
+    <!--  -->
+    <div class="container" id='txtHint'>
+        <div class="row" >
+    <?php
                 if(isset($_POST["book_id"])) {
                     // echo 'bought' . $_POST["book_id"];
                     $sql_amt = "SELECT price FROM Books WHERE id='$_POST[book_id]'";
@@ -112,37 +112,41 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
                     if($row['price'] === '0' ) {
                         $amt = 'Free';
                     } else {
-                        $amt = 'Buy';
+                        $amt = $row['price'];
                     }
 
                     if($row['sold'] == 0){
-                        echo "<tr>
-                        <tr>
-                            <td>$row[title]</td>
-                            <td>$row[author]</td>
-                            <td>$row[price]</td>
-                            <td>
-                            <form method='post'>
-                                <a href='#'>
-                                <button name='book_id' value='$row[id]' class='btn btn-success'>$amt</button>
-                                </a>
-                            </form>
-                            </td>
-                        </tr>
-                    </tr>";
-                    // echo "<div class='col-md-1 book'>
-                    //     <h3>$row[title]</h3>
-                    //     <span>by - $row[author]</span><br>
-                    //     <button class='btn btn-success'>Buy</button>
-                    // </div>";
+                        echo "
+                        <div class='col-md-3 single-post'>
+                            <div class='img-div'>
+                                <img src='assets/book_covers/". $row['imagename'] . "' alt='img not found' height='300px' width='250px'>
+                            </div>
+                            <div class='post-text'>
+                                <h4>$row[title]</h4>
+                                <p>- $row[author]</p>
+                                <h4 style=''>$ $row[price]</h4>
+                            </div>
+                        </div>
+                        ";
                     }
                     
                 }
     ?>
-        </table>
+        </div>
     </div>
-    
-    </div>
+    <!-- <div class="container">
+        <div class="row">
+            <div class="col-md-3 single-post">
+                <div class="img-div">
+                    <img src="imgs/book_cover.jpeg" alt="img not found" height="300px">
+                </div>
+                <div class="post-text">
+                    <p>Harry Potter</p>
+                    $70.00
+                </div>
+            </div>
+        </div>
+    </div> -->
 </body>
 
 </html>

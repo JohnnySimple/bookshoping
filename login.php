@@ -113,12 +113,12 @@
 <div class="container cont1">
         <h3>Login Here!</h3>
         <div class="form">
-            <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" class="form-group">
+                <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" class="form-group">
                 <input type="text" name="username" class="form-control" placeholder="Username">
                 <span class="error"><?php echo $nameErr; ?></span>
                 <input type="password" name="password" class="form-control" placeholder="Password">
                 <span class="error"><?php echo $passwordErr; ?></span>
-                <input type="submit" name="submit" value="Submit"> 
+                <input type="submit" name="submit" class="btn btn-primary" value="Submit"> 
             </form>
         </div>
     </div>
