@@ -59,18 +59,18 @@
         // check if image file is a real image or not
         $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
         if($check !== false){
-            echo "File is an image - " . $check["mime"] . ".";
+            // echo "File is an image - " . $check["mime"] . ".";
             $uploadOk = 1;
         } else {
-            echo "File is not an image.";
+            // echo "File is not an image.";
             $uploadOk = 0;
         }
 
         // check if file already exists
-        if(file_exists($target_file)){
-            echo "Sorry, file already exist!";
-            $uploadOk = 0;
-        }
+        // if(file_exists($target_file)){
+        //     echo "Sorry, file already exist!";
+        //     $uploadOk = 0;
+        // }
 
         // check file size
         if(filesize($_FILES["fileToUpload"]["size"] > 5000000)){
@@ -89,13 +89,14 @@
         if($uploadOk == 0){
             echo "Sorry, your file was not uploaded!";
             // try to upload the file if everything is ok
-        } else {
-            if(move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-                echo "The file " . basename($_FILES["fileToUpload"]["name"]) . " has been uploaded!";
-            } else {
-                echo "Sorry, there was an error uploading your file!";
-            }
         }
+        //  else {
+        //     if(move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
+        //         echo "The file " . basename($_FILES["fileToUpload"]["name"]) . " has been uploaded!";
+        //     } else {
+        //         echo "Sorry, there was an error uploading your file!";
+        //     }
+        // }
 
         $imgName = $_FILES["fileToUpload"]["name"]."\n";
 
@@ -104,7 +105,9 @@
         VALUES('$title', '$author', '$description', '$price', '$imgName')";
 
         if($conn->query($sql) == true) {
-            echo "Book '$title' added successfully!";
+            echo "<div class='alert alert-success' style='width:30%' align='center'>
+            Book '$title' added successfully!
+            </div>";
         } else {
             echo "Unable to add book: " . $conn->error;
         }
@@ -138,5 +141,10 @@
     </div>
 </div>
 <!-- </div>     -->
+<script>
+if(window.history.replaceState) {
+    window.history.replaceState(null, null, window.location.href);
+}
+</script>
 </body>
 </html>

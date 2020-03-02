@@ -25,7 +25,7 @@ if($q !== "") {
     $len = strlen($q);
     
     foreach($books as $name) {
-        if(stristr($q, substr($name['title'], 0, $len))) {
+        if(stristr($q, substr($name['title'], 0, $len)) && $name['sold'] == 0) {
             if($hint === "") {
                 $hint_array[count($hint_array)] = $name['title'];
             } else {

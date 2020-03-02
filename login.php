@@ -8,11 +8,14 @@
 <script src="js/jquery1.js"></script>
 
 <style>
-    .cont1 {
+    .form-div {
         margin-top:200px;
     }
     .form {
-        width:30%;
+        width:20%;
+        padding: 10px;
+        box-shadow:0 0 10px #fff;
+        border-radius: 20px;
     }
     .form input {
         margin:10px 0px 10px 0px;
@@ -62,10 +65,11 @@
         $sql = "SELECT * FROM Users WHERE username='$name' AND password='$pass'";
         $results = $conn->query($sql);
         $count = mysqli_num_rows($results);
-        echo "$count";
 
         if($count == 0) {
-            echo "<span>Please sign up first.</span>";
+            echo "<div class='container alert alert-danger' align='center' style='width:30%'>
+                    Username or password incorrect!
+                </div>";
         } else {
             $ad = "SELECT * FROM Users WHERE username='$name'";
             $ad_res = $conn->query($ad);
@@ -110,10 +114,13 @@
 
 <body>
 <?php require "homenavbar.php" ?>
-<div class="container cont1">
-        <h3>Login Here!</h3>
+<div class="container-fluid cont1" style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.7), rgba(0,0,0,0.7)),
+    url('imgs/library1.jpeg');height:700px;position:absolute;top:-50px;z-index:-1;width:100%">
+    <div align="center" class="form-div">
+        
         <div class="form">
-                <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" class="form-group">
+        <h2 style="color:#fff">Login Here!</h2>
+            <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" class="form-group">
                 <input type="text" name="username" class="form-control" placeholder="Username">
                 <span class="error"><?php echo $nameErr; ?></span>
                 <input type="password" name="password" class="form-control" placeholder="Password">
@@ -122,5 +129,11 @@
             </form>
         </div>
     </div>
+</div>
+<script>
+if(window.history.replaceState) {
+    window.history.replaceState(null, null, window.location.href);
+}
+</script>
 </body>
 </html>

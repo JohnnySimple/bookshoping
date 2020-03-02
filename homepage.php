@@ -33,6 +33,7 @@
 }
 .single-post {
     height:450px;
+    margin-top:20px;
 }
 .img-div {
     
@@ -65,7 +66,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
 
 ?>
 <body>
-    <?php require "homenavbar.php" ?>
+    <?php require "homeNavbarLoggedIn.php" ?>
     <div class="col-md-6"></div>
     <div class="col-md-3">
         <form action="">
@@ -81,8 +82,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
     <div class="container" id='txtHint'>
         <div class="row" >
     <?php
-                if(isset($_POST["book_id"])) {
-                    // echo 'bought' . $_POST["book_id"];
+                if(isset($_POST["order"])) {
                     $sql_amt = "SELECT price FROM Books WHERE id='$_POST[book_id]'";
                     $res = $conn->query($sql_amt);
                     $result = $res->fetch_assoc();
@@ -91,17 +91,15 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
                     $sql_user_id_res = $conn->query($sql_user_id);
                     $sql_user_id_result = $sql_user_id_res->fetch_assoc();
 
-                    // echo "$result[price] $sql_user_id_result[id] $_POST[book_id]";
                     $sql_order_book = "INSERT INTO Orders(customer_id, book_id, amount)
                     VALUES('$sql_user_id_result[id]', '$_POST[book_id]', '$result[price]')";
 
-                    
-
-
                     if($conn->query($sql_order_book) == true) {
-                        echo "Successful order!!!";
+                        echo "<div class='alert alert-success' align='center'
+                         style='width:30%;'>Successful order!!!</div>";
                         $sql_book_sold = "UPDATE Books SET sold='1' WHERE id=$_POST[book_id]";
                         $sql_book_sold_res = $conn->query($sql_book_sold);
+                        // echo "<script>window.location.reload();</script>";
 
                     } else {
                         echo $conn->error;
@@ -119,12 +117,17 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
                         echo "
                         <div class='col-md-3 single-post'>
                             <div class='img-div'>
-                                <img src='assets/book_covers/". $row['imagename'] . "' alt='img not found' height='300px' width='250px'>
+                                <img src='assets/book_covers/". $row['imagename'] . 
+                                "' alt='img not found' height='300px' width='250px'>
                             </div>
-                            <div class='post-text'>
+                            <div class='post-text' align='center'>
                                 <h4>$row[title]</h4>
                                 <p>- $row[author]</p>
                                 <h4 style=''>$ $row[price]</h4>
+                                <form method='post'>
+                                <button class='btn btn-primary' name='order'>Order</button>
+                                <input type='hidden' name='book_id' value='$row[id]'/>
+                                </form>
                             </div>
                         </div>
                         ";
@@ -147,6 +150,11 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
             </div>
         </div>
     </div> -->
+    <script>
+        if(window.history.replaceState) {
+            window.history.replaceState(null, null, window.location.href);
+        }
+    </script>
 </body>
 
 </html>

@@ -8,8 +8,15 @@
 <script src="js/jquery1.js"></script>
 
 <style>
+    .register-form-div {
+        margin-top:200px;
+        
+    }
     .form {
         width:30%;
+        padding:10px;
+        box-shadow: 0 0 10px #ccc;
+        border-radius:20px;
     }
     .form input {
         margin:10px 0px 10px 0px;
@@ -72,7 +79,7 @@
         if(empty($_POST["confirm_password"])) {
             $confirm_passwordErr = "Confirm password is required!";
         } elseif($_POST["confirm_password"] !== $pass) {
-            $confirm_passwordErr = "confirm password <b>must </b> be equal to password!";
+            $confirm_passwordErr = "Your password is not matching!";
         } else {
             $confirm_pass = test_input($_POST["confirm_password"]);
             
@@ -80,7 +87,9 @@
             VALUES('$firstname', '$lastname', '$name', '$email', '$pass')";
     
             if($conn->query($sql)) {
-                echo "Account created successfully!!";
+                echo "<div class='alert alert-success' style='width:30%' align='center'>
+                Account created successfully!!
+                </div>";
             } else {
                 echo "Unable to create account:" . $conn->error;
             }
@@ -101,27 +110,33 @@
 ?>
 <body>
 <?php require "homenavbar.php" ?>
-    <div class="container cont1">
-        <div>
-            <h3>Register Here!</h3>
+    <div class="container cont1" style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.7), rgba(0,0,0,0.7)),
+    url('imgs/library1.jpeg');height:700px;position:absolute;top:-50px;z-index:-1;width:100%">
+        <div class="register-form-div" align="center">
             <div class="form">
+            <h2 style="color:#fff">Register Here!</h2>
                 <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" class="form-group">
-                    <input type="text" name="firstname" class="form-control" placeholder="Firstname">
-                    <span class="error"><?php echo $firstnameErr; ?></span>
-                    <input type="text" name="lastname" class="form-control" placeholder="Lastname">
-                    <span class="error"><?php echo $lastnameErr; ?></span>
-                    <input type="text" name="username" class="form-control" placeholder="Username">
-                    <span class="error"><?php echo $nameErr; ?></span>
-                    <input type="email" name="email" class="form-control" placeholder="Email">
-                    <span class="error"><?php echo $emailErr; ?></span>
-                    <input type="password" name="password" class="form-control" placeholder="Password">
-                    <span class="error"><?php echo $passwordErr; ?></span>
-                    <input type="password" name="confirm_password" class="form-control" placeholder="Confirm Password">
-                    <span class="error"><?php echo $confirm_passwordErr; ?></span>
+                    <input type="text" name="firstname" class="form-control" placeholder="Firstname" required="">
+                    <span class="error" style="color:#fff;"><?php echo $firstnameErr; ?></span>
+                    <input type="text" name="lastname" class="form-control" placeholder="Lastname" required="">
+                    <span class="error" style="color:#fff;"><?php echo $lastnameErr; ?></span>
+                    <input type="text" name="username" class="form-control" placeholder="Username" required="">
+                    <span class="error" style="color:#fff;"><?php echo $nameErr; ?></span>
+                    <input type="email" name="email" class="form-control" placeholder="Email" required="">
+                    <span class="error" style="color:#fff;"><?php echo $emailErr; ?></span>
+                    <input type="password" name="password" class="form-control" placeholder="Password" required="">
+                    <span class="error" style="color:#fff;"><?php echo $passwordErr; ?></span>
+                    <input type="password" name="confirm_password" class="form-control" placeholder="Confirm Password" required="">
+                    <span class="error" style="color:#fff;"><?php echo $confirm_passwordErr; ?></span>
                     <input type="submit" name="submit" class="btn btn-primary" value="Submit"> 
                 </form>
             </div>
         </div>
     </div>
+    <script>
+        if(window.history.replaceState) {
+            window.history.replaceState(null, null, window.location.href);
+        }
+    </script>
 </body>
 </html>

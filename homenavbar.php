@@ -2,7 +2,7 @@
 <script src="js/bootstrap.min.js"></script>
 
 <nav class="navbar navbar-default">
-  <div class="container-fluid">
+  <div class="container-fluid"> 
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
         <span class="icon-bar"></span>
@@ -12,7 +12,7 @@
       <a class="navbar-brand" href="index.php">Book Store</a>
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
-    <ul class="nav navbar-nav navbar-right">
+    <!-- <ul class="nav navbar-nav navbar-right">
     <?php
 
       if($_SESSION["loggedin"] == true) {
@@ -34,6 +34,10 @@
       }
     ?>
        
+      </ul> -->
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href='register.php'>Register</a></li>
+        <li><a href='login.php'>Login</a></li>
       </ul>
     </div>
   </div>
